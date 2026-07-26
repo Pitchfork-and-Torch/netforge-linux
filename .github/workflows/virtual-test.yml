@@ -1,0 +1,15 @@
+name: VirtualTest
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  virtual-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run virtual tests
+        run: bash tests/virtual-test.sh

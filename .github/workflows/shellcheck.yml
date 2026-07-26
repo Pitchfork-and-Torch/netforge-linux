@@ -1,0 +1,25 @@
+name: ShellCheck
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+      - name: Analyze scripts
+        run: |
+          shellcheck -S error -x \
+            src/lib/common.sh \
+            src/network-auto.sh \
+            src/install-network-auto.sh \
+            src/uninstall-network-auto.sh \
+            src/netforge-status.sh \
+            install.sh
+          echo "ShellCheck: passed"
